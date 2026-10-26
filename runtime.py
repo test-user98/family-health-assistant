@@ -237,6 +237,9 @@ class Runtime:
 
     def _review_result(self,household,answer):
         options=self.config.get('human_review',{})
+        if options.get('enabled') and answer.get('route')=='doctor' and not (answer.get('member_id') and answer.get('episode_id')):
+            answer['human_review']={'status':'not_queued','delivery':'No notification was queued.'}
+            answer['context_note']='No email was queued: this report is not bound to a saved family member and episode. No clinician was contacted; arrange medical care directly.'
         if options.get('enabled') and answer.get('route')=='doctor' and answer.get('member_id') and answer.get('episode_id'):
             from human_review import HumanReview,ReviewError
             try:
@@ -562,6 +565,21 @@ class Runtime:
                 self.store._finish(household_id,state,revision,message,final,preserve_question=True)
                 return final
             urgent_hold=state.get('unassigned_emergency') or any(m.get('safety_hold')=='emergency' for m in state['members'].values())
+            # An unresolved concern remains latched, but a side-effect-free
+            # family-setup request is not another clinical assessment. Do not
+            # ask the model to reinterpret old emergency text as this request.
+            if urgent_hold and re.fullmatch(r"\s*(?:i(?:'d| would| want to)?\s+(?:like to\s+)?)?(?:add|register)\s+(?:a |my |another )?(?:family )?(?:member|person|someone)\s*[.!]?\s*",message,re.I):
+                final=result('register','Who would you like to add? Tell me their relationship to you, name, and age if known.')
+                final['context_note']='Your earlier breathing concern is still unresolved. '+self.config['messages']['emergency']
+                trace['guardrails'].append('administrative_request_preserves_emergency_hold')
+                self.store._finish(household_id,state,revision,message,final,preserve_question=True)
+                return final
+            if urgent_hold and re.fullmatch(r"\s*(?:wha+t(?:\s+can(?:\s+(?:it|this|that))?\s+be)?|what do you mean|why(?: this warning)?)\s*[?!.,]*\s*",message,re.I):
+                final=result('emergency',self.config['messages']['emergency'])
+                final['context_note']='This warning refers to the earlier report of difficulty breathing, not to adding a family member. Chat cannot determine its cause or confirm that it has resolved. No clinician contact is confirmed by this warning.'
+                trace['guardrails'].append('explained_existing_emergency_hold')
+                self.store._finish(household_id,state,revision,message,final,preserve_question=True)
+                return final
             if urgent_hold and re.search(r'\b(?:emergency number|call them|wait for.*search)\b',message,re.I):
                 return result('emergency',self.config['messages']['emergency']+' I cannot call anyone or infer your country. Do not wait for a web search.')
             medication = medication_boundary(message,state)

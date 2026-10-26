@@ -48,7 +48,7 @@
     "chest_pain"
   ],
   "emergency_patterns": [
-    "(?:cannot|can't|unable to|struggling to) breathe",
+    "(?:cannot|can't|unable\\s+to|struggling\\s+to|not\\s+able\\s+to)\\s+(?:breathe?|breathing)\\b",
     "(?:not|stopped) breathing",
     "gasping",
     "(?:blue|grey|gray) lips",

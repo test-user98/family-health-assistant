@@ -242,6 +242,12 @@
       const text = document.createElement('span');
       text.textContent = message.content;
       content.append(label, text);
+      if (typeof message.context_note === 'string' && message.context_note) {
+        const note = document.createElement('p');
+        note.className = 'member-meta';
+        note.textContent = message.context_note;
+        content.append(note);
+      }
       if (message.pendingReview) {
         const pending = message.pendingReview;
         const preview = document.createElement('pre');
@@ -506,7 +512,7 @@
     try {
       const result = await request('/api/chat', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({message})});
       if (typeof result.message !== 'string' || !result.message.trim()) throw new Error('The assistant returned an empty response.');
-      state.messages.push({role: 'assistant', content: result.message, trace: result.trace, sources: result.sources});
+      state.messages.push({role: 'assistant', content: result.message, trace: result.trace, sources: result.sources, context_note: result.context_note});
       renderMessages();
       try { await refreshState(false); }
       catch (_) { setStatus('Your reply arrived, but the family panel could not refresh. It will update when you reopen the app.'); }

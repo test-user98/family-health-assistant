@@ -261,7 +261,7 @@ def handler_for(db_path, backend=None, config=None, backend_name='llm', settings
                 for message_id,role, content, at, metadata in rows:
                     saved = json.loads(metadata)
                     messages.append(dict(message_id=message_id,role=role, content=content, at=at,
-                                         **{k: saved[k] for k in ('trace', 'sources') if k in saved}))
+                                         **{k: saved[k] for k in ('trace', 'sources','context_note') if k in saved}))
                 data = {'members': members, 'runtime': settings.metadata(session),
                         'backend': name, 'session_id': session}
                 data['learning_enabled']=bool(config.get('learning',{}).get('enabled'))
@@ -368,7 +368,7 @@ def handler_for(db_path, backend=None, config=None, backend_name='llm', settings
                     if access_for is not None and isinstance(agent, Runtime):
                         agent.allowed_member_ids=frozenset(access_for(session))
                     result = agent.chat(session, data['message'], request_id=data['request_id']) if 'request_id' in data and isinstance(agent, Runtime) else agent.chat(session,data['message'])
-                    metadata = {key: result[key] for key in ('trace', 'sources') if key in result}
+                    metadata = {key: result[key] for key in ('trace', 'sources','context_note') if key in result}
                     with database(db_path) as db:
                         if result.get('trace',{}).get('request_replayed'):return self.respond(200,result,session)
                         db.executemany('INSERT INTO chat_messages(session,role,content,at,metadata) VALUES (?,?,?,?,?)',

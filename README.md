@@ -2,6 +2,10 @@
 
 A lightweight local family-health harness: LLM interpretation and conversation, SQLite member/episode memory, bounded web-search tool iteration, and deterministic escalation. Optional reminders, test-human review and prompt evaluation remain separate from the assignment core. No live clinician service or clinical validation is claimed.
 
+## Assignment deliverables and scope
+
+Start with [SCOPE.md](SCOPE.md): required core versus optional extensions, memory versus learning, the three deliverables and honest limitations. The future spec is [PRODUCT_SPEC.md](PRODUCT_SPEC.md); exactly four local transcripts are in [SCENARIOS.md](SCENARIOS.md). No clinician dashboard, production service or extra framework is required. This expanded repository preserves later requested features; it is not presented as the fewest-lines solution.
+
 ## Run
 
 Python 3.10+:
