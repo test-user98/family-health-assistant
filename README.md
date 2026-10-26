@@ -6,6 +6,28 @@ A local family health chat with saved member and episode context. The model read
 
 Start with [SCOPE.md](SCOPE.md) for what is required, what is extra and what is still limited. See [ARCHITECTURE.md](ARCHITECTURE.md) for the high- and low-level design diagrams. The future spec is [PRODUCT_SPEC.md](PRODUCT_SPEC.md); exactly four local transcripts are in [SCENARIOS.md](SCENARIOS.md). No clinician dashboard, production service or extra framework is required. This expanded repository preserves later requested features; it is not presented as the fewest-lines solution.
 
+## What you can try
+
+- Introduce fictional family members: “Meera is 52. Arjun is 24.”
+- Correct a saved fact: “Meera is 53, not 52.” Later ask, “What age did I tell you?”
+- Switch between symptoms: “Meera's headache is better. Arjun has a cough.” Follow-ups should stay with the right member and episode; unclear references should trigger a question.
+- Describe a symptom and answer focused follow-ups. Emergency warnings take priority over model replies, search and email.
+- Ask a general health question or have a normal conversation without starting a full symptom intake.
+
+The latest local checks passed **575 app tests and 32 runner tests**. These check software behavior with synthetic data and fixtures; they do not certify medical safety. Earlier live testing included a 20-turn conversation and restart recall, but the full paid evaluation was not repeated after the final cleanup. The four submitted scenarios clearly label their supplied model replies and replayed search results.
+
+### What to expect from the optional features
+
+| Feature | What works and what is limited |
+|---|---|
+| Human review | One neutral Gmail send/reply round trip was verified. The reviewer is a test human, not a verified doctor. The fixed transfer response alone does not send an email. |
+| Reminders | Durable local scheduling, edits and cancellation; output goes to a local sink. The worker must run and the Mac must be awake. |
+| Search | Supported online lookup and citations. A valid source link does not by itself prove that every claim is supported. |
+| Learning | Facts and corrections persist. Feedback can enter a reviewed evaluation workflow; usage does not automatically train the model. |
+| DSPy | A real optimization experiment ran, but showed no verified gain. No optimized prompt was activated. |
+
+This is ready for assignment review and exploratory testing with fictional details. It cannot reliably diagnose, call emergency services or provide a real clinician transfer. It is not a production medical service. See [VALIDATION.md](VALIDATION.md) for evidence and remaining gaps.
+
 ## Run
 
 Python 3.10+:
