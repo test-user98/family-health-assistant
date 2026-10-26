@@ -1,0 +1,2 @@
+# Accurate context counting for the explicitly supported OpenAI model aliases.
+tiktoken==0.14.0

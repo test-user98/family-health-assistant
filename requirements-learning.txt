@@ -1,0 +1,2 @@
+# Optional offline optimizer only; the base app remains dependency-free.
+dspy[optuna]==3.4.1

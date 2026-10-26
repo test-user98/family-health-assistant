@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#faf9f6">
+  <title>Family health</title>
+  <style>
+    :root{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#252b27;background:#faf9f6;font-synthesis:none;--muted:#7a8079;--sage:#586c5c;--line:#e8e8e0;--sidebar:#f0f1eb}
+    *{box-sizing:border-box}body{margin:0}button,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:default}button:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid #a2b49e;outline-offset:4px}button{color:inherit}svg{flex-shrink:0}button svg{pointer-events:none}button{touch-action:manipulation}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}[hidden]{display:none!important}
+    .app{display:flex;height:100vh;height:100dvh;overflow:hidden}.sidebar{width:256px;flex:none;background:var(--sidebar);border-right:1px solid #e6e8df;display:flex;flex-direction:column;padding:29px 19px 21px;z-index:20}.brand{display:flex;align-items:center;gap:10px;padding:0 10px 37px;font-size:16px;font-weight:650;letter-spacing:-.5px}.mark{display:grid;place-items:center;width:31px;height:31px;border-radius:11px;background:#e0e7db;color:#50664f}.sidebar-head{display:flex;align-items:center;justify-content:space-between;padding:0 11px 14px}.sidebar-head h2{margin:0;font-size:11px;font-weight:650;letter-spacing:1.2px;text-transform:uppercase;color:#767f74}.count{font-size:11px;color:#778273;background:#e2e7dc;border-radius:6px;padding:2px 6px}.family-list{display:flex;flex-direction:column;gap:5px;overflow-y:auto;padding:0 2px;max-height:48vh}.family-empty{padding:13px 10px 19px;font-size:13px;line-height:1.7;color:#7d8379}.family-empty p{margin:0 0 7px}.family-empty span{color:#92988d;font-size:12px}.member{display:flex;align-items:center;gap:11px;padding:10px 9px;border-radius:11px}.avatar{display:grid;place-items:center;flex:none;background:#e1e6dc;color:#63745c;width:33px;height:33px;border-radius:50%;font-size:12px;font-weight:600}.member-copy{min-width:0}.member-name{font-size:13px;font-weight:550;overflow-wrap:anywhere}.member-meta{margin-top:4px;font-size:11px;color:#858b80}.add-family{margin:9px 2px 0;padding:11px 9px;display:flex;align-items:center;gap:9px;border:1px solid #dce1d5;background:transparent;border-radius:10px;color:#5f6c59;font-size:12px;text-align:left;transition:background .15s}.add-family:hover{background:#e7ebe1}.sidebar-note{margin-top:auto;padding:25px 11px 0;font-size:11px;line-height:1.8;color:#90958b}.sidebar-note .small-leaf{color:#798b72;display:block;margin-bottom:9px}.sidebar-close{display:none}.main{flex:1;min-width:0;display:flex;flex-direction:column;position:relative}.topbar{height:78px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 40px;border-bottom:1px solid transparent;gap:18px}.top-title{font-size:13px;font-weight:550;color:#666f63}.top-right{display:flex;align-items:center;gap:8px}.backend{font-size:10px;color:#89917f;background:#f0f2e9;border:1px solid #e4e9db;padding:6px 9px;border-radius:20px;white-space:nowrap}.backend.demo{color:#8c8262;background:#f6f2e7;border-color:#eee7d5}.mobile-menu{display:none;background:none;border:0;padding:7px;color:#6e7968}.scroll-area{flex:1;min-height:0;overflow-y:auto;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:#dedfd6 transparent}.content{max-width:828px;padding:0 34px;margin:0 auto;width:100%;min-height:100%;display:flex;flex-direction:column}.welcome{margin:auto 0;padding:30px 0 44px;text-align:center}.welcome-icon{width:51px;height:51px;border-radius:19px;background:#edf0e7;display:grid;place-items:center;margin:0 auto 24px;color:#718066}.eyebrow{font-size:10px;color:#939888;letter-spacing:1.8px;text-transform:uppercase;margin:0 0 15px;font-weight:550}.welcome h1{font-size:clamp(29px,3.3vw,39px);line-height:1.3;letter-spacing:-1.45px;font-weight:450;margin:0 0 17px}.welcome .intro{max-width:405px;margin:0 auto;color:#8b9085;font-size:13px;line-height:1.85}.starters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;text-align:left;margin:35px auto 0;max-width:620px}.starter{background:transparent;border:1px solid #e5e7dc;border-radius:13px;padding:17px 15px;min-height:104px;transition:background .15s,border-color .15s;text-align:left}.starter:hover{background:#f1f3e9;border-color:#d5ddcb}.starter svg{display:block;color:#86917c;margin-bottom:12px}.starter strong{display:block;font-size:11px;line-height:1.5;font-weight:550;color:#6a7462}.starter span{display:block;margin-top:4px;font-size:10px;line-height:1.6;color:#969c8c}.conversation{padding:27px 0 22px;display:flex;flex-direction:column;gap:28px}.message{display:flex;gap:13px;align-items:flex-start;line-height:1.8;font-size:14px;animation:arrive .2s ease}.message.assistant .message-icon{display:grid;place-items:center;flex:none;width:27px;height:27px;border-radius:9px;background:#e9eee2;color:#708364;margin-top:1px}.message-content{white-space:pre-wrap;overflow-wrap:anywhere;min-width:0;padding:0 1px}.message.user{align-self:flex-end;max-width:86%}.message.user .message-content{padding:12px 18px;background:#eeeee7;border-radius:19px 19px 5px 19px;color:#495043}.pending{display:flex;align-items:center;gap:5px;padding-top:10px;color:#a0a795}.pending span{display:block;width:5px;height:5px;border-radius:50%;background:currentColor;animation:pulse 1.1s infinite}.pending span:nth-child(2){animation-delay:.15s}.pending span:nth-child(3){animation-delay:.3s}.composer-area{flex:none;max-width:828px;padding:12px 34px 21px;width:100%;margin:0 auto;background:#faf9f6}.composer{border:1px solid #e0e4d8;border-radius:22px;background:#fff;box-shadow:0 4px 22px #425c3510;padding:7px 8px 7px 19px;display:flex;align-items:flex-end;gap:10px}.composer:focus-within{border-color:#b6c3ac;box-shadow:0 3px 22px #425c3512}.composer textarea{display:block;flex:1;min-width:0;background:transparent;border:0;outline:none!important;resize:none;min-height:42px;max-height:160px;line-height:1.65;padding:11px 0 7px;font-size:13px;color:#414b3b}.composer textarea::placeholder{color:#a2a896}.composer textarea:disabled{opacity:.65}.send{border:0;display:grid;place-items:center;flex:none;width:35px;height:35px;border-radius:50%;background:#667b5b;color:#fff;margin-bottom:2px;transition:background .15s,opacity .15s}.send:hover:not(:disabled){background:#4d6542}.send:disabled{background:#e9ede3;color:#abb4a2}.composer-foot{margin:12px 2px 0;display:flex;align-items:center;justify-content:center;gap:7px;color:#a1a796;font-size:9px;line-height:1.6;text-align:center}.status{min-height:0;margin:0 5px 9px;color:#8c6b4a;font-size:12px;line-height:1.6}.status button{border:0;background:transparent;color:#687d58;text-decoration:underline;font-size:12px;padding:3px 5px}.startup{margin:auto;text-align:center;font-size:13px;color:#89927f;padding:50px 0}.scrim{display:none}.inline-retry{margin:10px auto 0;border:1px solid #d8e0ce;border-radius:9px;padding:8px 14px;background:#eef2e8;color:#637354;font-size:12px}@keyframes pulse{0%,80%,100%{opacity:.35;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}@keyframes arrive{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+    @media(min-width:1300px){.content,.composer-area{max-width:860px}.topbar{padding-left:47px;padding-right:47px}}
+    @media(max-width:760px){.sidebar{width:238px;padding-top:25px}.brand{padding-bottom:30px}.topbar{padding:0 22px;height:65px}.content{padding:0 23px}.composer-area{padding:10px 23px 17px}.starters{grid-template-columns:1fr;max-width:360px;gap:8px;margin-top:25px}.starter{padding:12px 14px;min-height:0;display:grid;grid-template-columns:23px 1fr;column-gap:8px;align-items:center}.starter svg{grid-row:1 / 3;margin:0}.starter span{margin:1px 0 0;grid-column:2}.welcome{padding:18px 0 25px}.welcome h1{font-size:30px;letter-spacing:-1.2px}.welcome-icon{margin-bottom:19px;width:43px;height:43px;border-radius:15px}.welcome .intro{font-size:12px}.message{font-size:13px;gap:10px}.message.user{max-width:92%}.conversation{gap:24px;padding-top:18px}}
+    @media(max-width:600px){.sidebar{position:fixed;inset:0 auto 0 0;transform:translateX(-100%);transition:transform .2s ease;width:268px;box-shadow:10px 0 40px #35462a15}.sidebar.open{transform:translateX(0)}.sidebar-close{display:grid;place-items:center;position:absolute;top:24px;right:16px;width:27px;height:27px;border:0;background:transparent;color:#7b8574}.brand{padding-right:20px}.mobile-menu{display:grid;place-items:center;margin-left:-7px}.top-left{display:flex;gap:9px;align-items:center}.topbar{height:60px;padding:0 20px}.top-title{font-size:12px}.backend{font-size:9px;padding:5px 8px}.scrim.open{display:block;position:fixed;inset:0;background:#23311f38;z-index:19;border:0}.content{padding:0 23px}.composer-area{padding:9px 16px 14px}.composer{border-radius:20px;padding-left:16px}.composer textarea{font-size:14px}.composer-foot{font-size:9px;margin-top:10px}.eyebrow{font-size:9px;letter-spacing:1.5px}.welcome h1{font-size:29px}.welcome .intro{max-width:305px}.conversation{padding-top:16px}.message.assistant .message-icon{width:24px;height:24px;border-radius:8px}.message.user .message-content{padding:10px 15px}.family-list{max-height:58vh}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+    .settings-button{border:1px solid #dfe4d8;background:transparent;border-radius:9px;padding:8px 11px;font-size:11px;color:#63725d;white-space:nowrap}.settings-button:hover{background:#eef1e7}.connect-banner{margin:0 34px 8px;padding:12px 15px;border:1px solid #e3dfce;background:#f5f2e8;border-radius:12px;font-size:12px;line-height:1.7;color:#827652}.connect-banner button{border:0;padding:0;margin-left:5px;background:transparent;color:#596f4e;font-size:inherit;text-decoration:underline}.message-sources{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;white-space:normal}.message-sources a{font-size:11px;line-height:1.5;color:#627455;text-decoration:none;background:#edf1e6;border:1px solid #dfe7d4;border-radius:7px;padding:4px 8px;max-width:100%;overflow-wrap:anywhere}.message-sources a:hover{text-decoration:underline}.message-details{margin-top:9px;color:#8a9281;white-space:normal;font-size:10px;line-height:1.8}.message-details summary{cursor:pointer;display:list-item;width:fit-content}.message-details ul{margin:5px 0 0;padding-left:18px}.settings-modal{width:min(590px,calc(100% - 32px));max-height:calc(100dvh - 44px);border:1px solid #dce3d3;border-radius:20px;padding:0;background:#fafbf7;color:#35422f;box-shadow:0 24px 100px #26331f33}.settings-modal::backdrop{background:#25311f52;backdrop-filter:blur(2px)}.settings-shell{padding:26px 28px}.settings-head{display:flex;align-items:center;justify-content:space-between;gap:16px}.settings-head h2{margin:0;font-size:19px;letter-spacing:-.45px;font-weight:550}.settings-close{border:0;background:transparent;font-size:22px;color:#7d8873;width:30px;height:30px;border-radius:7px}.settings-intro{font-size:12px;line-height:1.8;color:#87917f;margin:9px 0 23px}.settings-section{border:0;padding:0;margin:0 0 23px;min-width:0}.settings-section legend{font-size:11px;letter-spacing:.7px;text-transform:uppercase;color:#77866b;font-weight:600;margin-bottom:14px}.field-label{display:block;font-size:12px;color:#65745b;margin-bottom:7px}.settings-modal input,.settings-modal select{width:100%;border:1px solid #dce2d3;border-radius:9px;background:#fff;color:#3e4c35;padding:10px 11px;font:inherit;font-size:12px;min-height:39px}.settings-modal input::placeholder{color:#a1aa96}.settings-modal input:focus,.settings-modal select:focus{outline:2px solid #a6b89a;outline-offset:1px}.model-fields{display:grid;grid-template-columns:minmax(0,1fr) 142px;gap:13px;margin-top:15px}.field-help{font-size:10px;line-height:1.8;color:#919a87;margin:7px 0 0}.field-help a{color:#6c805d}.connection-status{display:block;font-size:11px;line-height:1.7;color:#8b937f;margin:0 0 14px}.connection-status.ready{color:#617c50}.settings-note{font-size:10px;line-height:1.8;color:#909986;margin:0 0 16px}.settings-status{font-size:12px;line-height:1.7;color:#98724d;margin:0 0 13px}.settings-submit{border:0;border-radius:10px;padding:12px 17px;background:#647b57;color:#fff;font-size:12px;min-height:41px}.settings-submit:disabled{opacity:.55}.settings-actions{display:flex;align-items:center;justify-content:flex-end;gap:12px}.settings-cancel{border:0;background:transparent;color:#829075;padding:10px;font-size:12px}.configured-models{font-size:10px;line-height:1.7;color:#929c87;margin:8px 0 0;overflow-wrap:anywhere}
+    @media(max-width:760px){.connect-banner{margin-left:23px;margin-right:23px}.settings-shell{padding:23px}.top-right{gap:6px}.settings-button{font-size:10px;padding:7px 8px}.backend{max-width:170px;overflow:hidden;text-overflow:ellipsis}}
+    @media(max-width:600px){.connect-banner{margin:0 17px 8px;font-size:11px}.top-title{max-width:105px;line-height:1.5}.model-fields{grid-template-columns:minmax(0,1fr) 114px;gap:10px}.settings-shell{padding:21px}.settings-modal{max-height:calc(100dvh - 24px)}.backend{max-width:105px}}
+    @media(max-width:420px){.top-title{display:none}.backend{max-width:118px}}
+  </style>
+</head>
+<body>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+  <symbol id="leaf" viewBox="0 0 24 24"><path d="M19.5 4.5C10 3.5 4.5 6.5 4.5 12.2a6.3 6.3 0 0 0 6.3 6.3c5.7 0 8.7-5.5 8.7-15Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="m6 18 9-9M10 14v-3M10 14h3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+  <symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+  <symbol id="user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 20v-1.5a6.5 6.5 0 0 1 13 0V20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+  <symbol id="heart" viewBox="0 0 24 24"><path d="m12 20-8-8a5 5 0 0 1 7-7l1 1 1-1a5 5 0 0 1 7 7Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+  <symbol id="chat" viewBox="0 0 24 24"><path d="M20 11.3a8 8 0 0 1-8 7.7 9 9 0 0 1-3-.5L4 20l1.4-4.5A7.4 7.4 0 0 1 4 11.3a8 8 0 0 1 16 0Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8.5 11.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+</defs></svg>
+<div class="app">
+  <button id="scrim" class="scrim" type="button" aria-label="Close family panel" tabindex="-1"></button>
+  <aside class="sidebar" id="sidebar" aria-label="Your family">
+    <div class="brand"><span class="mark"><svg width="22" height="22" aria-hidden="true"><use href="#leaf"/></svg></span> family health</div>
+    <button class="sidebar-close" id="close-sidebar" type="button" aria-label="Close family panel"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+    <div class="sidebar-head"><h2>Your family</h2><span class="count" id="family-count">0</span></div>
+    <div id="family-list" class="family-list" aria-live="polite"></div>
+    <div id="family-empty" class="family-empty"><p>No one added yet.</p><span>Tell me about yourself or someone you care for, right here in the chat.</span></div>
+    <button id="add-family" class="add-family" type="button"><svg width="16" height="16" aria-hidden="true"><use href="#plus"/></svg>Add a family member</button>
+    <div class="sidebar-note"><svg class="small-leaf" width="19" height="19" aria-hidden="true"><use href="#leaf"/></svg>A little context.<br>Less repeating yourself.</div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div class="top-left"><button id="open-sidebar" class="mobile-menu" type="button" aria-label="Open family panel" aria-controls="sidebar" aria-expanded="false"><svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><span class="top-title">A little care, all together.</span></div>
+      <div class="top-right"><span id="backend" class="backend" hidden></span><button id="model-settings" class="settings-button" type="button" aria-haspopup="dialog">Model settings</button></div>
+    </header>
+    <div class="scroll-area" id="scroll-area">
+      <div class="content">
+        <div class="startup" id="startup" role="status">Opening your conversation…</div>
+        <section class="welcome" id="welcome" aria-labelledby="welcome-title" hidden>
+          <div class="welcome-icon"><svg width="29" height="29" aria-hidden="true"><use href="#leaf"/></svg></div>
+          <p class="eyebrow">Here for you and yours</p>
+          <h1 id="welcome-title">How can I help<br>your family today?</h1>
+          <p class="intro">Start with a question, or tell me a little about your family. We’ll take it one step at a time.</p>
+          <div class="starters">
+            <button class="starter" type="button" data-prompt="I'd like to register myself."><svg width="19" height="19" aria-hidden="true"><use href="#user"/></svg><strong>Introduce yourself</strong><span>A name is a good place to start.</span></button>
+            <button class="starter" type="button" data-prompt="I'd like to add a family member."><svg width="19" height="19" aria-hidden="true"><use href="#heart"/></svg><strong>Add someone you care for</strong><span>Build your family, as you chat.</span></button>
+            <button class="starter" type="button" data-prompt="I have a health question."><svg width="19" height="19" aria-hidden="true"><use href="#chat"/></svg><strong>Ask a health question</strong><span>Tell me what’s on your mind.</span></button>
+          </div>
+        </section>
+        <div class="conversation" id="conversation" role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions text" hidden></div>
+      </div>
+    </div>
+    <footer class="composer-area">
+      <div id="connect-banner" class="connect-banner" hidden>Connect a model for real conversation. <button id="connect-model" type="button">Open model settings</button></div>
+      <div id="status" class="status" role="status" hidden></div>
+      <form id="chat-form" class="composer">
+        <label for="message" class="sr-only">Message your family health assistant</label>
+        <textarea id="message" rows="1" maxlength="6000" placeholder="Tell me what’s on your mind…" autocomplete="off" spellcheck="true" enterkeyhint="send" disabled></textarea>
+        <button id="send" class="send" type="submit" aria-label="Send message" disabled><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </form>
+      <div class="composer-foot">For a medical emergency, contact your local emergency services.</div>
+    </footer>
+  </main>
+</div>
+<dialog id="settings-dialog" class="settings-modal" aria-labelledby="settings-title" aria-describedby="settings-intro">
+  <div class="settings-shell">
+    <div class="settings-head"><h2 id="settings-title">Model settings</h2><button id="close-settings" class="settings-close" type="button" aria-label="Close model settings">×</button></div>
+    <p id="settings-intro" class="settings-intro">Connect the models that power conversation and assessment. The runtime chooses the relevant stage and shows the actual calls under each reply’s Details.</p>
+    <form id="settings-form">
+      <fieldset class="settings-section">
+        <legend>Model provider</legend>
+        <label class="field-label" for="model-provider">Provider</label>
+        <select id="model-provider"><option value="openai">Direct OpenAI</option><option value="openrouter">OpenRouter</option></select>
+        <label class="field-label" for="route-provider">OpenRouter provider route</label>
+        <input id="route-provider" value="openai" autocomplete="off" spellcheck="false">
+        <label class="field-label" for="openrouter-key">OpenRouter API key · session only</label>
+        <input id="openrouter-key" type="password" autocomplete="off" spellcheck="false">
+        <p class="field-help">OpenRouter uses an explicit provider route with no fallback. Choose Provider default effort. This connection has a bounded server-process budget; reconnecting or restarting is not an account-wide cap.</p>
+        <span id="model-connection" class="connection-status">Not connected</span>
+        <label class="field-label" for="openai-key">API key</label>
+        <input id="openai-key" type="password" autocomplete="off" spellcheck="false" placeholder="Enter an OpenAI API key" aria-describedby="key-help">
+        <p id="key-help" class="field-help">Leave blank to keep a key already configured in this session or on the server.</p>
+        <label class="field-label" for="doppler-token" style="margin-top:15px">Doppler service token <span aria-hidden="true">· optional</span></label>
+        <input id="doppler-token" type="password" autocomplete="off" spellcheck="false" placeholder="Alternative: a scoped Doppler service token" aria-describedby="doppler-help">
+        <p id="doppler-help" class="field-help">Alternative to an OpenAI key; retrieves only OPENAI_API_KEY. Leave blank when using an OpenAI key directly.</p>
+        <div class="model-fields">
+          <div><label class="field-label" for="conversation-model">Conversation model</label><input id="conversation-model" type="text" autocomplete="off" spellcheck="false" placeholder="Model ID" required></div>
+          <div><label class="field-label" for="conversation-effort">Reasoning effort</label><select id="conversation-effort"><option value="none">Provider default</option><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div>
+        </div>
+        <div class="model-fields">
+          <div><label class="field-label" for="assessment-model">Assessment model</label><input id="assessment-model" type="text" autocomplete="off" spellcheck="false" placeholder="Model ID" required></div>
+          <div><label class="field-label" for="assessment-effort">Reasoning effort</label><select id="assessment-effort"><option value="none">Provider default</option><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></div>
+        </div>
+        <p class="field-help">Use model IDs available to your account. Reasoning-effort support depends on the selected model; unsupported settings will be reported when the connection is tested.</p>
+        <p id="configured-models" class="configured-models"></p>
+      </fieldset>
+      <fieldset class="settings-section">
+        <legend>Live web search</legend>
+        <span id="search-connection" class="connection-status">Firecrawl search availability is loading</span>
+        <label class="field-label" for="firecrawl-key">Firecrawl API key <span aria-hidden="true">· optional</span></label>
+        <input id="firecrawl-key" type="password" autocomplete="off" spellcheck="false" placeholder="Enter a Firecrawl API key">
+        <p class="field-help">Keyless search is available without an account. You can optionally use your own key from <a href="https://www.firecrawl.dev/" target="_blank" rel="noopener noreferrer">firecrawl.dev</a>. Availability and account limits apply; each reply’s Details shows whether a search actually ran.</p>
+      </fieldset>
+      <p class="settings-note">Keys are held in server memory for this session, not saved in the browser or database. Restarting the server clears keys entered here. Source links and model-call details are shown with replies when used.</p>
+      <div id="settings-status" class="settings-status" role="status" hidden></div>
+      <div class="settings-actions"><button id="cancel-settings" class="settings-cancel" type="button">Cancel</button><button id="save-settings" class="settings-submit" type="submit">Save &amp; test connection</button></div>
+    </form>
+  </div>
+</dialog>
+<script>
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const state = {messages: [], busy: false, ready: false, runtime: null, settingsBusy: false};
+  const leafIcon = '<svg width="18" height="18" aria-hidden="true"><use href="#leaf"/></svg>';
+
+  function resizeComposer() {
+    $('message').style.height = 'auto';
+    $('message').style.height = Math.min($('message').scrollHeight, 160) + 'px';
+    $('send').disabled = !state.ready || state.busy || !$('message').value.trim();
+  }
+
+  function setBusy(busy) {
+    state.busy = busy;
+    $('message').disabled = busy || !state.ready;
+    $('conversation').setAttribute('aria-busy', String(busy));
+    $('model-settings').disabled = busy;
+    $('connect-model').disabled = busy;
+    resizeComposer();
+  }
+
+  function safeSource(source) {
+    if (!source || typeof source.url !== 'string') return null;
+    try {
+      const url = new URL(source.url);
+      if (url.protocol !== 'https:' || url.username || url.password) return null;
+      return {url: url.href, title: typeof source.title === 'string' && source.title.trim() ? source.title : url.hostname};
+    } catch (_) { return null; }
+  }
+
+  function renderReplyMetadata(container, message) {
+    const sources = (Array.isArray(message.sources) ? message.sources : []).map(safeSource).filter(Boolean);
+    if (sources.length) {
+      const links = document.createElement('div');
+      links.className = 'message-sources';
+      links.setAttribute('aria-label', 'Sources');
+      sources.forEach((source, index) => {
+        const link = document.createElement('a');
+        link.href = source.url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = (index + 1) + '. ' + source.title;
+        links.append(link);
+      });
+      container.append(links);
+    }
+    const trace = message.trace;
+    if (!trace || typeof trace !== 'object') return;
+    const calls = Array.isArray(trace.calls) ? trace.calls : [];
+    const tools = Array.isArray(trace.tools) ? trace.tools : [];
+    if (!calls.length && !tools.length && typeof trace.route !== 'string') return;
+    const details = document.createElement('details');
+    details.className = 'message-details';
+    const summary = document.createElement('summary');
+    summary.textContent = 'Details';
+    const list = document.createElement('ul');
+    if (typeof trace.total_ms === 'number' && Number.isFinite(trace.total_ms)) {
+      const row = document.createElement('li');
+      row.textContent = 'Total: ' + (trace.total_ms / 1000).toFixed(2) + 's';
+      list.append(row);
+    }
+    if (typeof trace.failure_stage === 'string') {
+      const row = document.createElement('li');
+      row.textContent = 'Failed at: ' + trace.failure_stage;
+      list.append(row);
+    }
+    for (const call of calls) {
+      if (!call || typeof call.model !== 'string') continue;
+      const row = document.createElement('li');
+      const time = typeof call.ms === 'number' && Number.isFinite(call.ms) ? ' · ' + (call.ms / 1000).toFixed(1) + 's' : '';
+      row.textContent = (typeof call.stage === 'string' ? call.stage + ': ' : '') + call.model + (typeof call.effort === 'string' ? ' · effort ' + (call.effort === 'none' ? 'provider default' : call.effort) : '') + time;
+      list.append(row);
+    }
+    for (const tool of tools) {
+      if (!tool || typeof tool.name !== 'string') continue;
+      const row = document.createElement('li');
+      row.textContent = tool.name + (typeof tool.status === 'string' ? ' · ' + tool.status : '');
+      list.append(row);
+    }
+    if (typeof trace.route === 'string') {
+      const row = document.createElement('li');
+      row.textContent = 'Outcome: ' + trace.route;
+      list.append(row);
+    }
+    details.append(summary, list);
+    container.append(details);
+  }
+
+  function setStatus(text, retry) {
+    const node = $('status');
+    node.replaceChildren();
+    node.hidden = !text;
+    if (text) node.append(document.createTextNode(text));
+    if (retry) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = 'Try again';
+      button.addEventListener('click', retry);
+      node.append(button);
+    }
+  }
+
+  function renderMessages() {
+    const log = $('conversation');
+    log.replaceChildren();
+    $('welcome').hidden = state.messages.length > 0 || !state.ready;
+    log.hidden = state.messages.length === 0 && !state.busy;
+    for (const message of state.messages) {
+      if (!message || !['user', 'assistant', 'human_reviewer'].includes(message.role) || typeof message.content !== 'string') continue;
+      const row = document.createElement('div');
+      row.className = 'message ' + (message.role === 'human_reviewer' ? 'assistant' : message.role);
+      if (message.role === 'assistant') {
+        const icon = document.createElement('span');
+        icon.className = 'message-icon';
+        icon.innerHTML = leafIcon;
+        row.append(icon);
+      }
+      const content = document.createElement('div');
+      content.className = 'message-content';
+      const label = document.createElement('span');
+      label.className = 'sr-only';
+      label.textContent = message.role === 'user' ? 'You: ' : message.role === 'human_reviewer' ? 'Test human reviewer: ' : 'Assistant: ';
+      const text = document.createElement('span');
+      text.textContent = message.content;
+      content.append(label, text);
+      if (message.pendingReview) {
+        const pending = message.pendingReview;
+        const preview = document.createElement('pre');
+        preview.style.whiteSpace = 'pre-wrap';
+        preview.textContent = pending.text;
+        const confirm = document.createElement('button');
+        confirm.type = 'button';
+        confirm.textContent = 'I wrote this test reply — show it as my human response';
+        confirm.addEventListener('click', async () => {
+          confirm.disabled = true;
+          try {
+            await request('/api/review/confirm', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({event_id:pending.event_id,confirm_authorship:true})});
+            await refreshState(); renderMessages();
+          } catch (_) { confirm.disabled = false; confirm.textContent = 'Not accepted. Check this case and try again.'; }
+        });
+        content.append(preview, confirm);
+      }
+      if (message.role === 'human_reviewer' && message.review) {
+        const attribution = document.createElement('p');
+        attribution.className = 'member-meta';
+        attribution.textContent = 'Answered by test human reviewer (not a verified doctor): ' + message.review.reviewer +
+          ' · Authored ' + new Date(message.review.authored_at * 1000).toLocaleString() +
+          ' · Received ' + new Date(message.review.received_at * 1000).toLocaleString();
+        content.append(attribution);
+      }
+      if (message.role === 'assistant') renderReplyMetadata(content, message);
+      if (message.role === 'assistant' && state.learningEnabled && Number.isInteger(message.message_id)) {
+        const feedback = document.createElement('p');
+        feedback.className = 'member-meta';
+        feedback.textContent = 'Optional rating: saved locally, never automatically used for training. ';
+        for (const [caption, rating] of [['Helpful', 1], ['Not helpful', -1]]) {
+          const button = document.createElement('button'); button.type = 'button'; button.textContent = caption;
+          button.addEventListener('click', async () => {
+            try {
+              await request('/api/feedback', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message_id:message.message_id,rating,category:'other',consent:true})});
+              feedback.textContent = 'Feedback saved locally. Not used for training.';
+            } catch (_) { feedback.textContent = 'Feedback was not saved; please try again later.'; }
+          });
+          feedback.append(button);
+        }
+        content.append(feedback);
+      }
+      row.append(content);
+      log.append(row);
+    }
+    if (state.busy) {
+      const row = document.createElement('div');
+      row.className = 'message assistant';
+      const icon = document.createElement('span');
+      icon.className = 'message-icon';
+      icon.innerHTML = leafIcon;
+      const dots = document.createElement('div');
+      dots.className = 'pending';
+      dots.setAttribute('role', 'status');
+      dots.setAttribute('aria-label', 'Assistant is responding');
+      for (let i = 0; i < 3; i++) dots.append(document.createElement('span'));
+      row.append(icon, dots);
+      log.append(row);
+    }
+    requestAnimationFrame(() => { $('scroll-area').scrollTop = $('scroll-area').scrollHeight; });
+  }
+
+  function ageLabel(months) {
+    if (typeof months !== 'number' || !Number.isFinite(months)) return '';
+    if (months < 24) return months + (months === 1 ? ' month' : ' months');
+    const years = Math.floor(months / 12);
+    return years + (years === 1 ? ' year' : ' years');
+  }
+
+  function renderFamily(members) {
+    const list = $('family-list');
+    list.replaceChildren();
+    const valid = Array.isArray(members) ? members.filter(m => m && typeof m.name === 'string') : [];
+    $('family-empty').hidden = valid.length > 0;
+    $('family-count').textContent = String(valid.length);
+    for (const member of valid) {
+      const row = document.createElement('div');
+      row.className = 'member';
+      const avatar = document.createElement('span');
+      avatar.className = 'avatar';
+      avatar.textContent = member.name.trim().split(/\s+/).slice(0, 2).map(word => Array.from(word)[0] || '').join('').toUpperCase();
+      const copy = document.createElement('div');
+      copy.className = 'member-copy';
+      const name = document.createElement('div');
+      name.className = 'member-name';
+      name.textContent = member.name;
+      const meta = document.createElement('div');
+      meta.className = 'member-meta';
+      meta.textContent = [member.relationship, ageLabel(member.age_months)].filter(Boolean).join(' · ');
+      copy.append(name, meta);
+      row.append(avatar, copy);
+      list.append(row);
+    }
+  }
+
+  async function request(url, options = {}) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 250000);
+    try {
+      const response = await fetch(url, {credentials: 'same-origin', ...options, signal: controller.signal});
+      let data;
+      try { data = await response.json(); } catch (_) { throw new Error('The app returned an unreadable response.'); }
+      if (!response.ok) {
+        const error = new Error(typeof data.error === 'string' ? data.error : 'The app could not complete that request.');
+        error.status = response.status;
+        throw error;
+      }
+      return data;
+    } finally { clearTimeout(timer); }
+  }
+
+  async function refreshState(replaceMessages = true) {
+    let data;
+    try { data = await request(replaceMessages ? '/api/state' : '/api/state?history=0'); }
+    catch (error) {
+      if (replaceMessages || error.status !== 404) throw error;
+      data = await request('/api/state'); // An already-running older server may predate the lightweight endpoint.
+    }
+    renderFamily(data.members);
+    applyRuntime(data.runtime, data.backend);
+    state.reviewEnabled = Array.isArray(data.human_reviews);
+    state.learningEnabled = data.learning_enabled === true;
+    if (replaceMessages) {
+      state.messages = Array.isArray(data.messages) ? data.messages : [];
+      for (const pending of Array.isArray(data.pending_review_replies) ? data.pending_review_replies : []) {
+        state.messages.push({role:'assistant', content:'A reply in your known test email thread is awaiting your confirmation. It has not been marked as a human review.', pendingReview:pending});
+      }
+    }
+    return data;
+  }
+
+  function applyRuntime(runtime, backend) {
+    state.runtime = runtime && typeof runtime === 'object' ? runtime : {configured: false};
+    const ready = state.runtime.configured === true;
+    const demo = backend === 'demo';
+    const model = state.runtime.models && state.runtime.models.conversation;
+    $('backend').textContent = demo ? 'Offline test mode' : ready ? (model && model.model || 'Model connected') : 'Model needed';
+    $('backend').classList.toggle('demo', demo || !ready);
+    $('backend').hidden = false;
+    $('connect-banner').hidden = ready || demo;
+    $('message').placeholder = ready || demo ? 'Tell me what’s on your mind…' : 'Connect a model to start chatting…';
+  }
+
+  function setSettingsStatus(text) {
+    $('settings-status').textContent = text;
+    $('settings-status').hidden = !text;
+  }
+
+  function syncSettingsFields() {
+    const runtime = state.runtime || {};
+    const models = runtime.models || {};
+    const conversation = models.conversation || {};
+    const assessment = models.assessment || {};
+    $('conversation-model').value = conversation.model || '';
+    $('assessment-model').value = assessment.model || '';
+    $('conversation-effort').value = ['none', 'low', 'medium', 'high'].includes(conversation.effort) ? conversation.effort : 'none';
+    $('assessment-effort').value = ['none', 'low', 'medium', 'high'].includes(assessment.effort) ? assessment.effort : 'none';
+    $('model-provider').value = runtime.provider || 'openai';
+    $('route-provider').value = runtime.route_provider || 'openai';
+    const ready = runtime.configured === true;
+    $('model-connection').textContent = ready ? 'Selected provider key configured' : 'Selected provider key needed';
+    $('model-connection').classList.toggle('ready', ready);
+    const searchReady = runtime.web_search && runtime.web_search.configured === true;
+    $('search-connection').textContent = searchReady ? (runtime.web_search.authenticated === true ? 'Firecrawl key configured' : 'Firecrawl search available · keyless access') : 'Firecrawl search is unavailable';
+    $('search-connection').classList.toggle('ready', searchReady);
+    $('configured-models').textContent = ready ? 'Current configuration: ' + (conversation.model || 'conversation model') + ' / ' + (assessment.model || 'assessment model') : '';
+  }
+
+  function openSettings() {
+    if (state.busy || state.settingsBusy) return;
+    syncSettingsFields();
+    setSettingsStatus('');
+    $('settings-dialog').showModal();
+    $(($('model-provider').value === 'openrouter') ? 'openrouter-key' : 'openai-key').focus();
+  }
+
+  function closeSettings() {
+    if (state.settingsBusy) return;
+    $('settings-dialog').close();
+    $('model-settings').focus();
+  }
+
+  async function saveSettings(event) {
+    event.preventDefault();
+    if (state.settingsBusy || state.busy) return;
+    const payload = {
+      provider: $('model-provider').value,
+      route_provider: $('route-provider').value.trim(),
+      conversation_model: $('conversation-model').value.trim(),
+      conversation_effort: $('conversation-effort').value,
+      assessment_model: $('assessment-model').value.trim(),
+      assessment_effort: $('assessment-effort').value,
+    };
+    if (!payload.conversation_model || !payload.assessment_model) {
+      setSettingsStatus('Enter a model ID for both conversation and assessment.');
+      return;
+    }
+    if ($('openrouter-key').value.trim()) payload.openrouter_api_key = $('openrouter-key').value.trim();
+    if ($('openai-key').value.trim()) payload.openai_api_key = $('openai-key').value.trim();
+    if ($('doppler-token').value.trim()) payload.doppler_token = $('doppler-token').value.trim();
+    if ($('firecrawl-key').value.trim()) payload.firecrawl_api_key = $('firecrawl-key').value.trim();
+    state.settingsBusy = true;
+    $('save-settings').disabled = true;
+    $('close-settings').disabled = true;
+    $('cancel-settings').disabled = true;
+    $('save-settings').textContent = 'Testing connection…';
+    setSettingsStatus('');
+    try {
+      const result = await request('/api/settings', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload)});
+      if (result.error) throw new Error(result.error);
+      if (result.runtime) applyRuntime(result.runtime, result.backend);
+      await refreshState(false);
+      $('openrouter-key').value = '';
+      $('openai-key').value = '';
+      $('doppler-token').value = '';
+      $('firecrawl-key').value = '';
+      syncSettingsFields();
+      setSettingsStatus('Connection tested and settings saved.');
+      if (state.runtime.configured) {
+        $('settings-dialog').close();
+        $('message').focus();
+      }
+    } catch (error) {
+      setSettingsStatus(error.name === 'AbortError' ? 'The connection test timed out. Your entries are still here; check the server and try again.' : error.message || 'The connection could not be tested. Your entries are still here.');
+    } finally {
+      state.settingsBusy = false;
+      $('save-settings').disabled = false;
+      $('close-settings').disabled = false;
+      $('cancel-settings').disabled = false;
+      $('save-settings').textContent = 'Save & test connection';
+    }
+  }
+
+  async function initialize() {
+    $('startup').hidden = false;
+    $('startup').textContent = 'Opening your conversation…';
+    setStatus('');
+    try {
+      await refreshState();
+      state.ready = true;
+      $('startup').hidden = true;
+      setBusy(false);
+      renderMessages();
+      if (window.innerWidth > 600) $('message').focus();
+    } catch (error) {
+      $('startup').textContent = 'The app couldn’t open your conversation.';
+      setStatus('Check that the local app is running. ', initialize);
+    }
+  }
+
+  async function submitMessage(event) {
+    if (event) event.preventDefault();
+    const original = $('message').value;
+    const message = original.trim();
+    if (!state.ready || state.busy || !message) return;
+    const previous = state.messages.slice();
+    state.messages.push({role: 'user', content: message});
+    $('message').value = '';
+    setStatus('');
+    setBusy(true);
+    renderMessages();
+    try {
+      const result = await request('/api/chat', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({message})});
+      if (typeof result.message !== 'string' || !result.message.trim()) throw new Error('The assistant returned an empty response.');
+      state.messages.push({role: 'assistant', content: result.message, trace: result.trace, sources: result.sources});
+      renderMessages();
+      try { await refreshState(false); }
+      catch (_) { setStatus('Your reply arrived, but the family panel could not refresh. It will update when you reopen the app.'); }
+    } catch (error) {
+      state.messages = previous;
+      $('message').value = original;
+      setStatus(error.name === 'AbortError' ? 'That took too long. Your message is still here. ' : 'That didn’t send. Your message is still here. ', submitMessage);
+    } finally {
+      setBusy(false);
+      renderMessages();
+      $('message').focus();
+    }
+  }
+
+  function toggleSidebar(open) {
+    $('sidebar').classList.toggle('open', open);
+    $('scrim').classList.toggle('open', open);
+    $('open-sidebar').setAttribute('aria-expanded', String(open));
+    syncSidebarAccessibility();
+    if (open) $('close-sidebar').focus();
+  }
+
+  function syncSidebarAccessibility() {
+    const hidden = window.innerWidth <= 600 && !$('sidebar').classList.contains('open');
+    $('sidebar').inert = hidden;
+    $('sidebar').setAttribute('aria-hidden', String(hidden));
+  }
+
+  function usePrompt(prompt) {
+    if (state.busy || !state.ready) return;
+    toggleSidebar(false);
+    $('message').value = prompt;
+    resizeComposer();
+    $('message').focus();
+  }
+
+  $('chat-form').addEventListener('submit', submitMessage);
+  $('model-settings').addEventListener('click', openSettings);
+  $('connect-model').addEventListener('click', openSettings);
+  $('close-settings').addEventListener('click', closeSettings);
+  $('cancel-settings').addEventListener('click', closeSettings);
+  $('settings-form').addEventListener('submit', saveSettings);
+  $('settings-dialog').addEventListener('cancel', event => { if (state.settingsBusy) event.preventDefault(); });
+  $('message').addEventListener('input', resizeComposer);
+  $('message').addEventListener('keydown', event => {
+    if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) {
+      event.preventDefault();
+      submitMessage();
+    }
+  });
+  document.querySelectorAll('[data-prompt]').forEach(button => button.addEventListener('click', () => usePrompt(button.dataset.prompt)));
+  $('add-family').addEventListener('click', () => usePrompt("I'd like to add a family member."));
+  $('open-sidebar').addEventListener('click', () => toggleSidebar(true));
+  $('close-sidebar').addEventListener('click', () => { toggleSidebar(false); $('open-sidebar').focus(); });
+  $('scrim').addEventListener('click', () => { toggleSidebar(false); $('open-sidebar').focus(); });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && $('sidebar').classList.contains('open')) {
+      toggleSidebar(false);
+      $('open-sidebar').focus();
+    }
+  });
+  window.addEventListener('resize', syncSidebarAccessibility);
+  syncSidebarAccessibility();
+  initialize();
+  setInterval(async () => {
+    if (state.ready && (state.reviewEnabled || state.learningEnabled) && !state.busy && !state.settingsBusy && document.visibilityState === 'visible') {
+      const before = state.messages, count = before.length;
+      try {
+        const data = await request('/api/state');
+        if (state.busy || state.settingsBusy || state.messages !== before || state.messages.length !== count) return;
+        state.messages = Array.isArray(data.messages) ? data.messages : [];
+        renderFamily(data.members); applyRuntime(data.runtime, data.backend); renderMessages();
+      } catch (_) { /* No false delivery/review claim on outage. */ }
+    }
+  }, 5000);
+</script>
+</body>
+</html>

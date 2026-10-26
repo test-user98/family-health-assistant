@@ -1,0 +1,6 @@
+{
+  "consumed_dataset_hashes": [
+    "5872cd69525a149adc95b199be740f4dffa825201308e220caf973746c4526cd"
+  ],
+  "status": "Previously examined optimizer holdout; not fresh evaluation data. No training or automatic promotion authorization."
+}

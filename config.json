@@ -1,0 +1,233 @@
+{
+  "members": {},
+  "models": {
+    "conversation": {
+      "model": "openai/gpt-4.1-mini",
+      "effort": "none"
+    },
+    "assessment": {
+      "model": "openai/gpt-4.1-mini",
+      "effort": "none"
+    }
+  },
+  "runtime": {
+    "max_model_calls": 4,
+    "max_tool_calls": 2
+  },
+  "social_responses": {
+    "hi": "Hi! How can I help?",
+    "hello": "Hi! How can I help?",
+    "hey": "Hey! What's on your mind?",
+    "how is it going": "I'm here and ready to help. How are you doing?",
+    "how's it going": "I'm here and ready to help. How are you doing?",
+    "how are you": "I'm here and ready to help. How are you doing?",
+    "thanks": "You're welcome!",
+    "thank you": "You're welcome!"
+  },
+  "freshness_hours": 24,
+  "history_turns": 12,
+  "context": {
+    "token_counter": "cached_tiktoken"
+  },
+  "max_message_chars": 6000,
+  "topics": [
+    "fever",
+    "cough",
+    "headache",
+    "stomach",
+    "other"
+  ],
+  "emergency_flags": [
+    "red_flags",
+    "severe_breathing",
+    "blue_lips",
+    "unresponsive",
+    "stroke_signs",
+    "throat_swelling",
+    "nonblanching_rash",
+    "chest_pain"
+  ],
+  "emergency_patterns": [
+    "(?:cannot|can't|unable to|struggling to) breathe",
+    "(?:not|stopped) breathing",
+    "gasping",
+    "(?:blue|grey|gray) lips",
+    "lips (?:are |look )?(?:blue|grey|gray)",
+    "(?:cannot|can't|unable to) (?:speak|wake)",
+    "(?:face|facial) (?:is )?droop(?:ed|ing)?",
+    "slurred speech",
+    "speech (?:is |was )?slurred",
+    "(?:tongue|throat) (?:is )?swelling",
+    "swelling (?:of |in )(?:the )?(?:tongue|throat)",
+    "(?:unresponsive|unconscious)",
+    "chest pain",
+    "(?:hard|difficult) to wake",
+    "suddenly confused",
+    "(?:new |sudden )?(?:one.sided|arm) weakness",
+    "non.?blanching rash",
+    "rash (?:that |which )?(?:does not|doesn't) fade"
+  ],
+  "doctor_rules": [
+    {
+      "id": "breathlessness",
+      "all": [
+        [
+          "breathing_difficulty",
+          "eq",
+          true
+        ]
+      ]
+    },
+    {
+      "id": "worsening",
+      "all": [
+        [
+          "worsening",
+          "eq",
+          true
+        ]
+      ]
+    },
+    {
+      "id": "moderate_or_severe",
+      "all": [
+        [
+          "severity",
+          "in",
+          [
+            "moderate",
+            "severe"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "very_high_temperature",
+      "all": [
+        [
+          "temperature_c",
+          "gte",
+          40
+        ]
+      ]
+    },
+    {
+      "id": "infant_fever",
+      "all": [
+        [
+          "age_months",
+          "lt",
+          3
+        ],
+        [
+          "fever",
+          "eq",
+          true
+        ]
+      ]
+    },
+    {
+      "id": "young_infant_temperature",
+      "all": [
+        [
+          "age_months",
+          "lt",
+          3
+        ],
+        [
+          "temperature_c",
+          "gte",
+          38
+        ]
+      ]
+    },
+    {
+      "id": "infant_temperature",
+      "all": [
+        [
+          "age_months",
+          "lt",
+          6
+        ],
+        [
+          "temperature_c",
+          "gte",
+          39
+        ]
+      ]
+    },
+    {
+      "id": "persistent_fever",
+      "all": [
+        [
+          "fever",
+          "eq",
+          true
+        ],
+        [
+          "duration_hours",
+          "gte",
+          120
+        ]
+      ]
+    },
+    {
+      "id": "older_adult_fever",
+      "all": [
+        [
+          "age_months",
+          "gte",
+          780
+        ],
+        [
+          "fever",
+          "eq",
+          true
+        ]
+      ]
+    },
+    {
+      "id": "dehydration",
+      "all": [
+        [
+          "hydration_ok",
+          "eq",
+          false
+        ]
+      ]
+    }
+  ],
+  "questions": {
+    "red_flags": "Any difficulty breathing, blue lips, unusual drowsiness, confusion, new weakness, or a rash that does not fade when pressed?",
+    "duration_hours": "How long have these symptoms been present (hours or days)?",
+    "severity": "How severe are the symptoms: mild, moderate, or severe?",
+    "hydration_ok": "Are they drinking normally and passing urine as usual?"
+  },
+  "messages": {
+    "emergency": "This could be a medical emergency. Call your local emergency services now. Do not wait for this chat or a doctor transfer.",
+    "doctor": "This needs prompt medical review. I am transferring this case to a human doctor. This demo does not contact a clinician; please arrange medical care directly.",
+    "home": "Based on the information reported, home monitoring may be reasonable for now. Encourage rest and usual fluids, and monitor symptoms. Seek medical review if symptoms persist or worsen. For breathing difficulty, blue lips, unusual drowsiness, confusion, or new weakness, contact local emergency services immediately.",
+    "error": "I could not safely complete this assessment. Please try again or seek medical advice. If there are emergency symptoms, contact local emergency services now.",
+    "unsupported": "Lab report analysis, a custom knowledge base, and live doctor booking are not available in this demo. Please ask a clinician to review the report or arrange care directly."
+  },
+  "cache": {
+    "enabled": true,
+    "ttl_seconds": 60,
+    "max_entries": 64
+  },
+  "safety_report_patterns": {
+    "breathing_difficulty": "\\b(?:breathless|short of breath|difficulty breathing|struggling with (?:his |her |their )?breath)\\b",
+    "worsening": "\\b(?:(?:getting|feels?|is|seems?) worse|worsening)\\b",
+    "hydration_ok": "\\b(?:not drinking(?: normally)?|no urine|not peeing)\\b"
+  },
+  "reminders": {
+    "enabled": false,
+    "grace_seconds": 300
+  },
+  "context_bytes": 100000,
+  "provider": {
+    "name": "openrouter",
+    "route_provider": "openai",
+    "session_budget_usd": "0.90"
+  }
+}
