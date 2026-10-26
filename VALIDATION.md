@@ -36,3 +36,5 @@ The owned human-test server was resumed on the same localhost URL/database after
 ## Readability and design pass
 
 The memory-query, question-selection and provider-adapter helpers were reformatted with shorter comments and docstrings. Their executable ASTs match the prior versions after excluding docstrings. All 575 app tests and 32 runner checks passed afterward. Scenario headings and notes were shortened; all 32 recorded user/assistant turns and the four-scenario limit were preserved. The two diagrams in ARCHITECTURE.md map the current code, with optional features kept separate.
+
+Both design diagrams were also rendered in a temporary local browser preview using Mermaid 12.2.0. That caught and fixed a sequence-diagram punctuation error before the final diagram commit. The preview contained only design text, with no credentials or health records. GitHub access was checked through the authenticated CLI; the separate browser session was signed out, so no account or repository access settings were changed.

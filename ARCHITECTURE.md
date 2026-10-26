@@ -54,7 +54,7 @@ sequenceDiagram
         Run->>Store: Save scoped emergency hold
         Run-->>HTTP: Fixed emergency advice, no model wait
     else Safe shortcut: greeting or family setup
-        Run->>Store: Save turn; keep any earlier concern
+        Run->>Store: Save turn and keep any earlier concern
         Run-->>HTTP: Short reply, with context note when needed
     else Model interpretation needed
         Run->>Store: Read allowed members, episodes and saved facts
@@ -72,7 +72,7 @@ sequenceDiagram
                 Run-->>HTTP: Question, review or home-monitoring text
             else General answer or profile wording
                 opt Valid education-cache hit
-                    Run->>Run: Reuse checked response; still run intake and safety
+                    Run->>Run: Reuse checked response and keep intake and safety checks
                 end
                 loop Until valid final reply or call limit, on a cache miss
                     Run->>Model: Response prompt + checked context + available sources
