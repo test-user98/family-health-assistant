@@ -32,3 +32,7 @@ Credentials, local household databases, actual email/reply captures, private pro
 The previous suite missed an inability-to-breathe wording variant and a registration/explanation detour after an urgent hold. Failing-first synthetic regressions now cover spelling variants, negation/history/education counterexamples, independent family setup, explanatory follow-ups and persisted household-scoped HTTP notices. Fixed escalation wording and the retained safety hold remain intact. Unbound review results now explicitly report that no email was queued.
 
 The owned human-test server was resumed on the same localhost URL/database after verifying no paid request was in flight. All 14 prior chat rows were preserved; its spending cap and remaining call allowance were retained. A separate synthetic household verified emergency → registration → explained emergency with zero model calls/emails. The original user's conversation was not rewritten. Scope and product-spec documentation now separate original deliverables from later extensions, without a duplicate harness.
+
+## Readability and design pass
+
+The memory-query, question-selection and provider-adapter helpers were reformatted with shorter comments and docstrings. Their executable ASTs match the prior versions after excluding docstrings. All 575 app tests and 32 runner checks passed afterward. Scenario headings and notes were shortened; all 32 recorded user/assistant turns and the four-scenario limit were preserved. The two diagrams in ARCHITECTURE.md map the current code, with optional features kept separate.

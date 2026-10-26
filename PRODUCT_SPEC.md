@@ -1,9 +1,9 @@
-# Future product: a family health continuity companion
+# Where this could go
 
-A shared conversation that remembers who is being discussed, distinguishes an old concern from a new episode, and retrieves corrected facts without making the family repeat its history. It could support multigenerational households, caregivers and clinician-supervised follow-ups.
+The goal is a family health chat that remembers who we're talking about, what happened before and which details were corrected. Switching from a parent's ongoing concern to a child's new symptom should not mean starting over.
 
-The intended distinction is structured household/member/episode continuity with evidence-linked corrections, explicit uncertainty and program-controlled safety boundaries—not a claim of superiority to competing assistants. Useful memory is already part of the assignment core.
+The current app covers that memory, symptom follow-ups and clear safety routes. It could be useful for families, caregivers and people managing long-running conditions with their care team.
 
-The north star is a calm bridge to professional care: concise explanations, relevant questions, trustworthy evidence and consented handoff summaries. Future plug-ins could add clinician-reviewed lab extraction, a curated local knowledge base, multilingual support and verified telemedicine routing.
+Next, I'd explore multilingual chat, easier sharing of a short care summary and a verified clinician handoff. Lab reports and a clinician-reviewed knowledge base could come later as separate plug-ins.
 
-Reminders, test-human email and DSPy evaluation are optional experiments already present in this repository. Broad clinical handoff, reliable unattended delivery and measurable continual quality improvement remain separate work. Feedback must not silently rewrite medical policy or train on real health records. Expansion requires privacy controls, clinical review and evidence of benefit.
+Reminders, test-review emails and prompt evaluation are optional extras already in the repo. They're experiments, not medical services or proof that the model gets smarter with use. Any expansion would need consent, privacy checks and clinical review. Feedback should never quietly change medical safety rules or train on real health records.
